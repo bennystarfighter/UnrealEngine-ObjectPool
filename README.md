@@ -4,6 +4,8 @@
 
 This is a plugin made for Unreal Engine 5 which supplies an [ObjectPool](https://en.wikipedia.org/wiki/Object_pool_pattern) packaged inside a blueprint component.
 
+**Disclaimer: This code was made in the very early days of me learning Unreal Engines c++ framework.**
+
 # Why
 
 >[Wikipedia (Object pool pattern)](https://en.wikipedia.org/wiki/Object_pool_pattern) - The object pool pattern is a software creational design pattern that uses a set of initialised objects kept ready to use – a "pool" – rather than allocating and destroying them on demand. A client of the pool will request an object from the pool and perform operations on the returned object. When the client has finished, it returns the object to the pool rather than destroying it; this can be done manually or automatically.
