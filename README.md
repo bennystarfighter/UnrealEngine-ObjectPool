@@ -34,14 +34,14 @@ That's why I created this plugin a couple of years ago and recently rewrote it t
 > This is an extreme example with many actors spawning each frame. Take this with a full fist of salt since the performance gain is unique to every project.
 
 > [!NOTE]  
-> The **`GREEN`** graph represents the game thread which is responsible for this logic.
+> The **`RED`** graph represents the game thread which is responsible for this logic and the **`GREEN`** one is the total frame time.
 
 **In my test project I spawn 100 bullet actors each frame and then destroy them after 0.2 seconds.**
 
 | **Normal spawning** | **Pooled + pre-spawn** | **Pooled + no pre-spawn** |
 | --- | --- | --- |
-| You can see a consistent performance hit due to constructing so many new objects. |   When using pooling with pre-spawning instead we se a big initial performance hit since we're spawning a lot of actors at the same time. But after that the only thing eating precious frame time is our general code which runs in both examples anyway.    |   When not pre-spawning any actors and letting the pool automatically expand with new actors as needed we can se a frame time which steadily moves down as it fills upp the pool and pulled actors dont have to be spawned.|
-|![Normal spawning performance](Images/unpooled_graph.jpg)|![Pooled spawning no pre spawning performance](Images/pooled_expanding_graph.jpg)|![Pooled spawning no pre spawning performance](Images/pooled_expanding_graph.jpg)|
+| You can see a consistent performance hit due to constructing so many new objects. This also causes bigger garbage collection hitches later due to all the objects being destroyed. |   When using pooling with pre-spawning instead we se a big initial performance hit since we're spawning a lot of actors at the same time. But after that the only thing eating precious frame time is our general code which runs in both examples anyway.    |   When not pre-spawning any actors and letting the pool automatically expand with new actors as needed we can se a frame time which steadily moves down as it fills upp the pool and pulled actors dont have to be spawned.|
+|![Normal spawning performance](Images/unpooled_graph.jpg)|![Pooled spawning no pre spawning performance](Images/pooled_graph.jpg)|![Pooled spawning no pre spawning performance](Images/pooled_expanding_graph.jpg)|
 
 # How
 There's different ways to use the pool. You can let the pool automatically spawn your actors when you try to pull an actor and the pool is empty, or you can set a fixed amount of actors to pre-spawn and then have them ready, or a combination of them both. I recommend you pre-spawn an estimate of how many actors you're going to need at the same time and also allow it to expand automatically if needed. 
